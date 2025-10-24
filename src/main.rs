@@ -1,19 +1,29 @@
 use std::io;
 
 fn main() {
-	let mut str1 = String::new();
-	let mut str2 = String::new();
+	let mut input = String::new();
 
 	io::stdin()
-		.read_line(&mut str1)
+		.read_line(&mut input)
 		.expect("Failed input");
 
-	io::stdin()
-		.read_line(&mut str2)
-		.expect("Failed input");
+	let parts: Vec<&str> = input.trim().split_whitespace().collect();
+	
+	let num1: i32 = match parts[0].parse() {
+		Ok(n) => n,
+		Err(_) => {
+			println!("Invalid input for the first number.");
+			return;
+		}
+	};
 
-	let num1: i32 = str1.trim().parse().expect("Please type a number!");
-	let num2: i32 = str2.trim().parse().expect("Please type a number!");
+	let num2: i32 = match parts[1].parse() {
+		Ok(n) => n,
+		Err(_) => {
+			println!("Invalid input for the second number.");
+			return;
+		}
+	};
 
 	let sum = num1 + num2;
 	println!("{}", sum);
